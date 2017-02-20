@@ -1,0 +1,8 @@
+Marcus Schimizzi
+Lab 2 Report
+
+When the game first starts up, the user is shown what their starting hand is and then asked if they want to hit or stand. If they hit, they can add a card to their hand in order to hit 21. When they eventually decide to stand, the user's hand is compared to that of the dealer and a winner is decided. The game then shows the current number of wins for each side to the player and asks if the user wants to play again. 
+
+From a programming perspective, the game operates based mainly on the functions of the CardDeck class. The class has the main functions of shuffle(), deal(), and play(). Shuffle uses Knuth's method to shuffle the deck using a FOR loop. The deal() function picks the next card at the top of the deck and returns it. If there are 15 or less cards left, it uses new and delete to "open a new deck". The play() function uses deal() to first populate each hand with two cards. Then, it asks the user if they want to hit or stand. If the user hits, it calls the deal() function again for the user's hand. It also simulates the dealer's hand, hitting until the hand is greater than or equal to 17. Finally, it uses IF statements to check which player won, and return it to the screen. Additionally, the main program uses a WHILE loop to constantly check whether or not the user wants to keep playing.
+
+Verification for the program came in the form of playing the game several times, and making sure it played the way it was supposed to. The one thing of note is that if the user busts and the dealer busts then it gives the win to the dealer. The reason I did this is because if the user busts, the dealer would never even play, and would simply automatically win. 

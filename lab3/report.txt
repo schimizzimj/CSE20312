@@ -1,0 +1,8 @@
+Marcus Schimizzi
+Report.txt
+
+  From the user perspective, after starting the program, the program waits for the input of two numbers and then outputs the sum of those two numbers. The program continues this process until the program reaches the end of input (end of file or the user presses Ctrl + d). 
+
+  From a programmer's perpective, the program operates using two structs, Node and List. The List keeps track of the head Node, and each Node points to the next. Using this structure, the lists can read in numbers and store them as a list of nodes. With this, the program is able to sum larger numbers than ints would be able to store themselves. The actual main() function operates using a while loop to keep reading in two inputted numbers until it detects the end of input. For each of these numbers, it generates a list using a FOR loop and the pushFront() member function. Then, with these two lists, it can sum them together into a new list using the addNumberLists() member function. Finally, after this sum is calculated, it uses the print() function to display it to the screen. 
+
+  The testing phase of this lab was relatively simple, as I was so kindly supplied with a program to test the functionality. So, I ran the "make test" to check the functionality and made sure there were no error messages. In addition, I also experimented with various numbers and attempted to check if they outputted the expected sums. 
