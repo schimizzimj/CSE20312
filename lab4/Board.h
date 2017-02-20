@@ -10,7 +10,8 @@ class Board{
   public:
     Board();
     ~Board();
-    print();
+    void print();
+    void print_possible(int=0);
 
   private:
     int actual_board[9][9];
