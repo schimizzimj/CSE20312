@@ -88,12 +88,12 @@ private:
 
 class TreapMap : public Map {
 public:
-            void            insert(const std::string &key, const std::string &value); //TODO
-            const Entry     search(const std::string &key); //TODO
-            void            dump(std::ostream &os, DumpFlag flag); //TODO
+            void            insert(const std::string &key, const std::string &value); 
+            const Entry     search(const std::string &key); 
+            void            dump(std::ostream &os, DumpFlag flag); 
                            ~TreapMap() { delete root; } //TODO
-            int             getMaxTreeHeight(); //TODO
-            int             getMinTreeHeight(); //TODO
+            int             getMaxTreeHeight(); 
+            int             getMinTreeHeight(); 
             void            preOrderTraversal();
 private:
             Node    *root = nullptr;

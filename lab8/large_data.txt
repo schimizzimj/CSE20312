@@ -1,0 +1,24 @@
+./map_bench -b treap -n 10000000
+Insert: 20.422 s
+Search: 17.284 s
+
+./map_bench -b rbtree -n 10000000
+Insert: 26.873 s
+Search: 15.798 s
+
+./map_bench -b treap -n 10000000
+Insert: 19.65 s
+Search: 16.934 s
+
+./map_bench -b rbtree -n 10000000
+Insert: 24.968 s
+Search: 16.275 s
+
+./map_bench -b treap -n 10000000
+Insert: 18.027 s
+Search: 15.442 s
+
+./map_bench -b rbtree -n 10000000
+Insert: 25.446 s
+Search: 16.157 s
+

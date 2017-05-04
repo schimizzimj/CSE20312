@@ -1,0 +1,6 @@
+Marcus Schimizzi
+
+	For the user, the program is used by feeding in the number of edges of the graph, the destination and source of each, the number of connections to search for, and the destination and source of each of these. The user may run this on as many graphs as they like. Then, the program will output whether all of these connections exist on each graph at the end of input. 
+	Internally, the program functions using a graph class to perform most operations and a main driver program to accept input, instantiate a member of the graph class, run its needed functions, and send the output to the user. The graph class uses an unordered map to represent the graph using adjacency lists. Additionally, the graph class has an add_edges function to allow the main program to add a edge between a source and destination node. This function simply checks if the source already exists. If so, it appends the new destination to its list, and otherwise, it adds the source and destination pair to the map. Additionally, the graph class has a function called connects() to test if there is a connection between a source and destination. It does this using a depth first search of the graph. 
+	Finally, the program was verified simply by using the test cases in the input file provided.  
+

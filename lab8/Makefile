@@ -66,4 +66,4 @@ test-benchmark: map_bench
 	@echo "== RBTree == "
 	@./map_bench -b rbtree -n 30000 -p 8
 	@echo "== Treap == "
-	@./map_bench -b unsorted -n 30000 -p 8
+	@./map_bench -b treap -n 30000 -p 8

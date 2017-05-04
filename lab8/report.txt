@@ -1,0 +1,26 @@
+Marcus Schimizzi
+4/10/17
+
+  For this collection of files, map.h lays out the groundwork of how all of the files relate. This file defines all of the types, classes, structs, and constants used in all of the rest of the files. For example, it creates the Node struct, which is used in each of the tree classes. In addition, map.h lays out the Map class, which functions as the base class for all of the different implementations. This class contains virtual functions for insert, search, dump, and a deconstructor that all of the derived classes can use in their own ways. Each of the other .cpp files (except constants.cpp) contain the implementations of derived classes for various backend implementations of the map. These files tailor the derived virtual functions to fit that particular backend (such as rbtree, sorted, treap, etc.). In addition, the treap program uses the search_r and dump_r functions from bst.cpp, using the extern keyword. 
+
+  The treap backend implementation has six main functions (insert, search, dump, getMaxTreeHeight, getMinTreeHeight, and preOrderTraversal. The insert function recursively searches through the treap and calls RotateLeft or RotateRight when needed to maintain the priorities follow the treap's Max Binary Heap property. In the base case, once the node the function is called with is NULL, the function creates a new node in that place. Then, as it works its way back out of the recursion, it rotates as necessary and returns the new root of the treap. Both the search and the dump functions simply use the exact same functions used in bst.cpp. The max and min height functions start at the root and recursively find the heights of its left and right subtrees until it reaches a NULL node. The only difference between the two is that findMax returns the greater height and findMin returns the lesser height. Finally, preOrder prints the value at the given node, and then recursively does the same first for its left subtree and then for its right subtree.
+
+  The benchmarking results show that unsorted has the slowest search times, which is to be expected. It also shows that the sorted insert takes longer than the unsorted insert, which is also expected since the sorted backend sorts as it inserts anything. The RBTree is extremely fast, much faster than the binary search tree. For the metrics on my test, the treap has the fastest insert time, but the RBTree is faster in terms of searching. This is somewhat expected, as the RBTree should perform better than the treap, which in turn should perform better than the binary search tree. 
+
+Benchmarking for n = 30,000 ...
+== Unsorted ==
+Insert: 32.304 s
+Search: 31.012 s
+== Sorted == 
+Insert: 41.303 s
+Search: 0.063828 s
+== BST == 
+Insert: 33.757 s
+Search: 27.43 s
+== RBTree == 
+Insert: 0.067739 s
+Search: 0.044936 s
+== Treap == 
+Insert: 0.045757 s
+Search: 0.050185 s
+
