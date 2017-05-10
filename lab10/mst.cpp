@@ -8,68 +8,93 @@
 
 #include <iostream>
 #include <limits.h>
+#include <vector>
+#include <algorithm>
+#include <string>
 using namespace std;
+
+int minimum_cost(int cost[], bool frontier[], int dim);
+void append_output(int parent[], int n, vector<vector<int>> &graph, int dim, vector<string> &out);
+void prim_mst(vector<vector<int>> &graph, int dim, vector<string> &out);
 
 int main() {
 	int dimension;
+	vector<string> output;
 	while (cin >> dimension) {
-		int matrix[dimension][dimension];
+		vector<vector<int>> graph(dimension, vector<int>(dimension));
+		int input;
 		for (int row = 0; row < dimension; row++) {
 			for (int col = 0; col < dimension; col++) {
-				cin >> matrix[row][col]; 
+				cin >> input;
+				graph[row][col] = input;
 			}
 		}
-		
+		prim_mst(graph, dimension, output);
 	}
-	
+	for (auto it = output.begin(); it != output.end() - 1; ++it)
+		cout << *it << endl;
 }
 
-int minKey(int key[], bool mstSet[], int dim)
+int minimum_cost(int cost[], bool frontier[], int dim)
 {
     int min = INT_MAX, min_index;
- 
+
     for (int v = 0; v < dim; v++)
-    if (mstSet[v] == false && key[v] < min)
-    min = key[v], min_index = v;
- 
+    	if (frontier[v] == false && cost[v] < min)
+    		min = cost[v], min_index = v;
     return min_index;
 }
 
-int printMST(int parent[], int n, int graph[V][V])
+void append_output(int parent[], int n, vector<vector<int>> &graph, int dim, vector<string> &output)
 {
-    cout<<"Edge   Weight\n";
-    for (int i = 1; i < V; i++)
-        printf("%d - %d    %d \n", parent[i], i, graph[i][parent[i]]);
+	vector<string> m;
+	char a, b;
+	string line = "";
+	int sum = 0;
+
+	for (int i = 1; i < dim; i++)
+		sum += graph[i][parent[i]];
+	output.push_back(to_string(sum));
+
+    for (int i = 1; i < dim; i++) {
+        a = (char)(i + 'A');
+		b = (char)(parent[i] + 'A');
+		if (a < b) {
+			line = a;
+			line += b;
+		}else {
+			line = b;
+			line += a;
+		}
+		m.push_back(line);
+	}
+	sort(m.begin(), m.end());
+	for (auto it = m.begin(); it != m.end(); ++it) {
+		output.push_back(*it);
+	}
+	output.push_back("");
 }
 
-void primMST(int graph[V][V])
+void prim_mst(vector<vector<int>> &graph, int dim, vector<string> &output)
 {
-    int parent[V]; // Array to store constructed MST
-    int key[V]; // Key values used to pick minimum weight edge in cut
-    bool mstSet[V]; // To represent set of vertices not yet included in MST
- 
-    for (int i = 0; i < V; i++)
-        key[i] = INT_MAX, mstSet[i] = false;
- 
-    key[0] = 0; // Make key 0 so that this vertex is picked as first vertex
-    parent[0] = -1; // First node is always root of MST
- 
+    int parent[dim]; // stores minimum spanning tree
+    int cost[dim]; // stores costs, allows picking of minimum weights
+    bool frontier[dim]; // vertices not in minimum spanning tree
 
-    for (int count = 0; count < V - 1; count++)
+    for (int i = 0; i < dim; i++) // initialize costs to MAX, and frontier to false
+        cost[i] = INT_MAX, frontier[i] = false;
+
+    cost[0] = 0; // ensures the first vertex is picked first
+    parent[0] = -1; // makes first node root of minimum spanning tree
+
+    for (int count = 0; count < dim - 1; count++)
     {
+        int u = minimum_cost(cost, frontier, dim);
+        frontier[u] = true;
 
-        int u = minKey(key, mstSet);
-
-        mstSet[u] = true;
- 
-        for (int v = 0; v < V; v++)
- 
-            if (graph[u][v] && mstSet[v] == false && graph[u][v] < key[v])
-                parent[v] = u, key[v] = graph[u][v];
+        for (int v = 0; v < dim; v++)
+            if (graph[u][v] != -1 && frontier[v] == false && graph[u][v] < cost[v])
+                parent[v] = u, cost[v] = graph[u][v];
     }
- 
-    printMST(parent, V, graph);
+    append_output(parent, dim, graph, dim, output);
 }
-
-
-
